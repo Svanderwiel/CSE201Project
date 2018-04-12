@@ -2,6 +2,8 @@
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,13 +27,15 @@ public class WalletInterface extends JFrame{
 	
 	public WalletInterface() {
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		setTitle("Testudo Bitcoin Wallet");
+		setTitle("Testudo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
 		amountTextField.setPreferredSize(new Dimension(200, 50));
 		
-		panel.setLayout(new GridLayout(0,2));
+		panel.setLayout(new GridBagLayout());
+		
+		
 		
 		panel.add(coldStorage);
 		panel.add(privateKey);
