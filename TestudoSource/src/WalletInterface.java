@@ -31,6 +31,8 @@ public class WalletInterface extends JFrame{
 		
 		amountTextField.setPreferredSize(new Dimension(200, 50));
 		
+		panel.setLayout(new GridLayout(0,2));
+		
 		panel.add(coldStorage);
 		panel.add(privateKey);
 		panel.add(publicKey);
