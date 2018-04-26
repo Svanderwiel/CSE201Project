@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
-public class Interface extends JFrame {
+public class WalletInterfaceVer2 extends JFrame {
 	private JTextField textField;
 
 	/**
@@ -39,7 +39,7 @@ public class Interface extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Interface() {
+	public WalletInterfaceVer2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
 		GridBagLayout gridBagLayout = new GridBagLayout();
