@@ -15,9 +15,25 @@ public class Executable extends JFrame{
 		WalletInterface wScreen = new WalletInterface();
 		PassScreen splash = new PassScreen();
 		
-		splash.login.addActionListener(new ButtonListener());
 		window.add(splash);
+		window.add(wScreen);
 		window.setSize(splash.getDEFAULT_WIDTH(), splash.getDEFAULT_HEIGHT());
+		
+		
+		splash.login.addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent a) {
+				
+				splash.setLogin_condition(true);
+				
+				if(splash.getLoginCond() == true) {
+					splash.setVisible(false);
+					wScreen.setVisible(true);
+					window.setSize(wScreen.getDEFAULT_WIDTH(), wScreen.getDEFAULT_HEIGHT());
+				}
+			}
+		});
+		
 		window.setVisible(true);
 			
 	}

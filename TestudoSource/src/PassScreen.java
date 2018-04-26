@@ -16,6 +16,8 @@ public class PassScreen extends JPanel{
 
 	private boolean login_condition = false;
 
+	
+
 	JTextArea input = new JTextArea(1, 25);
 	JButton login = new JButton("Login");
 	JLabel label = new JLabel("Input Access Code:");
@@ -40,6 +42,10 @@ public class PassScreen extends JPanel{
 	
 	public boolean getLoginCond() {
 		return login_condition;
+	}
+	
+	public void setLogin_condition(boolean login_condition) {
+		this.login_condition = login_condition;
 	}
 	
 	private class Listener implements ActionListener{
