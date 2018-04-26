@@ -1,4 +1,3 @@
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -27,7 +26,7 @@ public class WalletInterfaceVer2 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Interface frame = new Interface();
+					WalletInterfaceVer2 frame = new WalletInterfaceVer2();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
