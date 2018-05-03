@@ -46,6 +46,7 @@ public class Executable extends JFrame{
 									wScreen.setVisible(true);
 								} else {
 									splash.label.setText("Password Incorrect!");
+									splash.input.setText("");
 								}
 							} catch (Exception e) {
 								System.out.println("ya fucked up.");
@@ -75,17 +76,5 @@ public class Executable extends JFrame{
 			return PassHash.pwdCheck(pwd, checker.getStoredAC());
 		}
 	}
-	
-	
-//	class PassButtonListener implements ActionListener{
-//		
-//		public void actionPerformed(ActionEvent a) {
-//			passCheck("XXX");
-//		}
-//		
-//	}
-	
-	
-	
 }
 
