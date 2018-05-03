@@ -38,20 +38,20 @@ public class Executable extends JFrame{
 								splash.label.setText("Password must be over 12 characters!");
 							} else {
 							
-							try {
-								if(passCheck(splash.input.getText())) {
-									splash.setVisible(false);
-									window.setContentPane(wScreen.getContentPane());
-									window.setBounds(100, 100, 640, 300);
-									wScreen.setVisible(true);
-								} else {
-									splash.label.setText("Password Incorrect!");
-									splash.input.setText("");
+								try {
+									if(passCheck(splash.input.getText())) {
+										splash.setVisible(false);
+										window.setContentPane(wScreen.getContentPane());
+										window.setBounds(100, 100, 640, 300);
+										wScreen.setVisible(true);
+									} else {
+										splash.label.setText("Password Incorrect!");
+										splash.input.setText("");
+									}
+								} catch (Exception e) {
+									System.out.println("ya fucked up.");
+									e.printStackTrace();
 								}
-							} catch (Exception e) {
-								System.out.println("ya fucked up.");
-								e.printStackTrace();
-							}
 							}
 						}
 					});

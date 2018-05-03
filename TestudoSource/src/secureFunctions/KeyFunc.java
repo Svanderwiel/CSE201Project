@@ -7,10 +7,6 @@ import org.bitcoinj.core.Base58;
 import org.bitcoinj.core.ECKey;
 
 public class KeyFunc {
-
-	public static void main(String[] args) {
-		
-	}
 	
 	public static byte[] privateKeyGen() {
 		ECKey newkey = new ECKey();
@@ -23,7 +19,7 @@ public class KeyFunc {
 	}
 	
 	public static String[] toColdStorage(ECKey keyPair){
-		String[] coldKeys = { keyPair.getPrivateKeyAsHex(), keyPair.getPublicKeyAsHex()};
+		String[] coldKeys = {keyPair.getPrivateKeyAsHex(), keyPair.getPublicKeyAsHex()};
 		return coldKeys;
 	}
 	

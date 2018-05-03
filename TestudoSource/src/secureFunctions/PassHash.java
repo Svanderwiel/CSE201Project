@@ -39,7 +39,7 @@ public class PassHash {
 	public static boolean pwdCheck(String pwd, String str) throws Exception{
 		
 		//Checks password length to ensure hash method requirements are met.
-		if(pwd == null || pwd.length() < 12) throw new IllegalArgumentException("checkMethodFailPwdLen");
+		if(pwd == null || pwd.length() < 12) throw new IllegalArgumentException("checkMethodPwdLenFail");
 		
 		//Splits salt and stored password, hashes them, and checks the stored salted hash code.
 		String[] separate = str.split("\\|");
@@ -57,7 +57,7 @@ public class PassHash {
 	 */
 	private static String hash(String pwd, byte[] salt) throws Exception{
 		//Checks for correct password length.
-		if(pwd == null || pwd.length() < 12) { throw new IllegalArgumentException("hashMethodFailLen");}
+		if(pwd == null || pwd.length() < 12) { throw new IllegalArgumentException("hashMethodLenFail");}
 		
 		//Generates a key factory, a key generated from the parameters, and returns a string representation of said key.
 		SecretKeyFactory inst = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
