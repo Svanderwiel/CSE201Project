@@ -31,30 +31,9 @@ public class PassScreen extends JPanel{
 		add(label);
 		add(input);
 		add(login);
-		
-		login.addActionListener(new Listener());
+
 	}
 	
-	public void passCheck(String pwd) {
-		
-		login_condition = true;
-	}
-	
-	public boolean getLoginCond() {
-		return login_condition;
-	}
-	
-	public void setLogin_condition(boolean login_condition) {
-		this.login_condition = login_condition;
-	}
-	
-	private class Listener implements ActionListener{
-		
-			public void actionPerformed(ActionEvent a) {
-				passCheck("XXX");
-			}
-		
-	}
 	
 	public int getDEFAULT_WIDTH() {
 		return DEFAULT_WIDTH;

@@ -13,7 +13,7 @@ import java.security.SecureRandom;
 
 public class PassHash {
 	
-	private static final int saltLength = 40;
+	private static final int saltLength = 10;
 	private static final int keyLength = 120;
 	private static final int hashLength = 15000;
 	
@@ -42,7 +42,7 @@ public class PassHash {
 		if(pwd == null || pwd.length() < 12) throw new IllegalArgumentException("checkMethodFailPwdLen");
 		
 		//Splits salt and stored password, hashes them, and checks the stored salted hash code.
-		String[] separate = str.split("|");
+		String[] separate = str.split("\\|");
 		if (separate.length != 2) throw new IllegalArgumentException("checkMethodFail");
 		return hash(pwd, Base64.getDecoder().decode(separate[0])).equals(separate[1]);
 	}
@@ -60,7 +60,7 @@ public class PassHash {
 		if(pwd == null || pwd.length() < 12) { throw new IllegalArgumentException("hashMethodFailLen");}
 		
 		//Generates a key factory, a key generated from the parameters, and returns a string representation of said key.
-		SecretKeyFactory inst = SecretKeyFactory.getInstance("PBEWithHmacSHA1AndDESede");
+		SecretKeyFactory inst = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 		SecretKey key = inst.generateSecret(new PBEKeySpec(pwd.toCharArray(), salt, hashLength, keyLength));
 		return Base64.getEncoder().encodeToString(key.getEncoded());
 	}

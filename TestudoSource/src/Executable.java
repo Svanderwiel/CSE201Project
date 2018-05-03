@@ -1,6 +1,8 @@
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import secureFunctions.PassFile;
+import secureFunctions.PassHash;
 
 import javax.swing.JFrame;
 
@@ -32,13 +34,23 @@ public class Executable extends JFrame{
 						
 						public void actionPerformed(ActionEvent a) {
 							
-							splash.setLogin_condition(true);
+							if(splash.input.getText().length() < 12) {
+								splash.label.setText("Password must be over 12 characters!");
+							} else {
 							
-							if(splash.getLoginCond() == true) {
-								splash.setVisible(false);
-								window.setContentPane(wScreen.getContentPane());
-								window.setBounds(100, 100, 640, 300);
-								wScreen.setVisible(true);
+							try {
+								if(passCheck(splash.input.getText())) {
+									splash.setVisible(false);
+									window.setContentPane(wScreen.getContentPane());
+									window.setBounds(100, 100, 640, 300);
+									wScreen.setVisible(true);
+								} else {
+									splash.label.setText("Password Incorrect!");
+								}
+							} catch (Exception e) {
+								System.out.println("ya fucked up.");
+								e.printStackTrace();
+							}
 							}
 						}
 					});
@@ -53,19 +65,25 @@ public class Executable extends JFrame{
 	
 	
 
-	private boolean passCheck(String pwd) {
+	private static boolean passCheck(String pwd) throws Exception {
 		
-		return true;
-	}
-	
-	
-	class ButtonListener implements ActionListener{
-		
-		public void actionPerformed(ActionEvent a) {
-			passCheck("XXX");
+		PassFile checker = new PassFile();
+		if(checker.isNewUser()) {
+			checker.writeAC(PassHash.saltedHash(pwd));
+			return true;
+		} else {
+			return PassHash.pwdCheck(pwd, checker.getStoredAC());
 		}
-		
 	}
+	
+	
+//	class PassButtonListener implements ActionListener{
+//		
+//		public void actionPerformed(ActionEvent a) {
+//			passCheck("XXX");
+//		}
+//		
+//	}
 	
 	
 	
