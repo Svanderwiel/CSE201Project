@@ -18,9 +18,9 @@ public class PassScreen extends JPanel{
 
 	
 
-	JTextArea input = new JTextArea(1, 25);
-	JButton login = new JButton("Login");
-	JLabel label = new JLabel("Input Access Code:");
+	protected JTextArea input = new JTextArea(1, 25);
+	protected JButton login = new JButton("Login");
+	protected JLabel label = new JLabel("Input Access Code:");
 	
 	public PassScreen() {
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);

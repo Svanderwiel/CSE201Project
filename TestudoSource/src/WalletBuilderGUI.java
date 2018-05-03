@@ -22,37 +22,22 @@ import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-public class WalletBuilderGUI extends JFrame {
+public class WalletBuilderGUI extends JPanel {
 
 	private JPanel contentPane;
-	private JTextField textField_1;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WalletBuilderGUI frame = new WalletBuilderGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public JPanel getContentPane() {
+		return contentPane;
 	}
+
+	private JTextField textField_1;
 
 	/**
 	 * Create the frame.
 	 */
 	public WalletBuilderGUI() {
-		setTitle("Testudo Bitcoin Wallet");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -62,7 +47,7 @@ public class WalletBuilderGUI extends JFrame {
 		tabbedPane.addTab("Key Generation", null, panel, null);
 		panel.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(150, 13, 288, 22);
 		comboBox.addItem("Generate new private key");
 		comboBox.addItem("Generate new public key");
@@ -72,6 +57,7 @@ public class WalletBuilderGUI extends JFrame {
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(150, 92, 288, 22);
+		textField_1.setEditable(false);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -97,6 +83,7 @@ public class WalletBuilderGUI extends JFrame {
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(56, 47, 471, 130);
+		textArea.setEditable(false);
 		panel_1.add(textArea);
 		
 		//Attempting to implement scroll bar
@@ -115,10 +102,7 @@ public class WalletBuilderGUI extends JFrame {
 		panel_2.add(btnGenerateKeys);
 		
 		JButton btnExport = new JButton("Export");
-		btnExport.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnExport.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e) { }  });
 		btnExport.setBounds(253, 51, 69, 25);
 		panel_2.add(btnExport);
 		
@@ -129,6 +113,7 @@ public class WalletBuilderGUI extends JFrame {
 		JTextArea txtrAsdfadf = new JTextArea();
 		txtrAsdfadf.setBounds(173, 107, 289, 22);
 		txtrAsdfadf.setText(" ");
+		txtrAsdfadf.setEditable(false);
 		panel_2.add(txtrAsdfadf);
 		
 		JLabel lblPrivate = new JLabel("Private :");
@@ -137,6 +122,7 @@ public class WalletBuilderGUI extends JFrame {
 		
 		JTextArea txtrPrivate = new JTextArea();
 		txtrPrivate.setBounds(173, 150, 289, 22);
+		txtrPrivate.setEditable(false);
 		panel_2.add(txtrPrivate);
 	}
 }
