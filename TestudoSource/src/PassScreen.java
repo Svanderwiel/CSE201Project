@@ -1,16 +1,14 @@
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class PassScreen extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final int DEFAULT_WIDTH = 400;
 	private final int DEFAULT_HEIGHT = 100;
 
@@ -24,8 +22,6 @@ public class PassScreen extends JPanel{
 	
 	public PassScreen() {
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		
-		//splash.setLayout(new GridLayout(1,2));
 		input.setAlignmentY(CENTER_ALIGNMENT);
 		login.setAlignmentY(CENTER_ALIGNMENT);
 		add(label);

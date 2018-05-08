@@ -1,13 +1,9 @@
 package secureFunctions;
 
 import java.util.Base64;
-import java.util.Base64.Decoder;
-import java.util.Base64.Encoder;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 

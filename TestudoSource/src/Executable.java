@@ -6,6 +6,7 @@ import secureFunctions.PassHash;
 
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class Executable extends JFrame{
 
 	public Executable() {
@@ -49,7 +50,7 @@ public class Executable extends JFrame{
 										splash.input.setText("");
 									}
 								} catch (Exception e) {
-									System.out.println("ya fucked up.");
+									System.out.println("PassCheckListenerFail");
 									e.printStackTrace();
 								}
 							}

@@ -1,29 +1,30 @@
 
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
-import java.awt.CardLayout;
 import javax.swing.JComboBox;
-import javax.swing.JLayeredPane;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 import javax.swing.JTextArea;
-import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 
+@SuppressWarnings("serial")
 public class WalletBuilderGUI extends JPanel {
 
+	protected JButton btnNewButton_1;
+	protected JButton btnSignTransaction;
+	protected JButton btnExportTransaction;
+	protected JComboBox<String> comboBox;
+	protected JTextArea textArea;
+	protected JButton btnGenerateKeys;
+	protected JButton btnExport;
+	protected JTextArea txtrPublic;
+	protected JTextArea txtrPrivate;
+	
 	private JPanel contentPane;
 	public JPanel getContentPane() {
 		return contentPane;
@@ -47,7 +48,7 @@ public class WalletBuilderGUI extends JPanel {
 		tabbedPane.addTab("Key Generation", null, panel, null);
 		panel.setLayout(null);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox = new JComboBox<String>();
 		comboBox.setBounds(150, 13, 288, 22);
 		comboBox.addItem("Generate new private key");
 		comboBox.addItem("Generate new public key");
@@ -64,7 +65,7 @@ public class WalletBuilderGUI extends JPanel {
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Signing transactions", null, panel_1, null);
 		
-		JButton btnNewButton_1 = new JButton("Upload Transactions");
+		btnNewButton_1 = new JButton("Upload Transactions");
 		btnNewButton_1.setBounds(223, 13, 149, 25);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -72,16 +73,16 @@ public class WalletBuilderGUI extends JPanel {
 		});
 		panel_1.setLayout(null);
 		
-		JButton btnSignTransaction = new JButton("Sign Transaction");
+		btnSignTransaction = new JButton("Sign Transaction");
 		btnSignTransaction.setBounds(56, 13, 129, 25);
 		panel_1.add(btnSignTransaction);
 		panel_1.add(btnNewButton_1);
 		
-		JButton btnExportTransaction = new JButton("Export Transaction");
+		btnExportTransaction = new JButton("Export Transaction");
 		btnExportTransaction.setBounds(410, 13, 139, 25);
 		panel_1.add(btnExportTransaction);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setBounds(56, 47, 471, 130);
 		textArea.setEditable(false);
 		panel_1.add(textArea);
@@ -97,11 +98,11 @@ public class WalletBuilderGUI extends JPanel {
 		tabbedPane.addTab("Cold Storage", null, panel_2, null);
 		panel_2.setLayout(null);
 		
-		JButton btnGenerateKeys = new JButton("Generate Keys");
+		btnGenerateKeys = new JButton("Display Keys");
 		btnGenerateKeys.setBounds(232, 13, 115, 25);
 		panel_2.add(btnGenerateKeys);
 		
-		JButton btnExport = new JButton("Export");
+		btnExport = new JButton("Export");
 		btnExport.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e) { }  });
 		btnExport.setBounds(253, 51, 69, 25);
 		panel_2.add(btnExport);
@@ -110,17 +111,17 @@ public class WalletBuilderGUI extends JPanel {
 		lblPublic.setBounds(120, 110, 42, 16);
 		panel_2.add(lblPublic);
 		
-		JTextArea txtrAsdfadf = new JTextArea();
-		txtrAsdfadf.setBounds(173, 107, 289, 22);
-		txtrAsdfadf.setText(" ");
-		txtrAsdfadf.setEditable(false);
-		panel_2.add(txtrAsdfadf);
+		txtrPublic = new JTextArea();
+		txtrPublic.setBounds(173, 107, 289, 22);
+		txtrPublic.setText(" ");
+		txtrPublic.setEditable(false);
+		panel_2.add(txtrPublic);
 		
 		JLabel lblPrivate = new JLabel("Private :");
 		lblPrivate.setBounds(120, 153, 48, 16);
 		panel_2.add(lblPrivate);
 		
-		JTextArea txtrPrivate = new JTextArea();
+		txtrPrivate = new JTextArea();
 		txtrPrivate.setBounds(173, 150, 289, 22);
 		txtrPrivate.setEditable(false);
 		panel_2.add(txtrPrivate);
