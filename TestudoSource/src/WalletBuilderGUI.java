@@ -3,11 +3,15 @@
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import org.bitcoinj.core.ECKey;
+import secureFunctions.KeyFunc;
 import javax.swing.JTabbedPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -62,7 +66,8 @@ public class WalletBuilderGUI extends JPanel {
 		panel.add(comboBox);
 		
 		warn = new JButton(" ");
-		warn.setBounds(185, 60, 225, 22);
+		warn.setBounds(185, 60, 225, 33);
+		warn.addActionListener(new KeyMListener());
 		panel.add(warn);
 		
 		textField_1 = new JTextField();
@@ -102,11 +107,13 @@ public class WalletBuilderGUI extends JPanel {
 		
 		btnGenerateKeys = new JButton("Display Keys");
 		btnGenerateKeys.setBounds(232, 13, 115, 25);
+		btnGenerateKeys.addActionListener(new DisplayKeyListener());
 		panel_2.add(btnGenerateKeys);
 		
 		btnExport = new JButton("Export");
 		btnExport.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e) { }  });
 		btnExport.setBounds(253, 51, 69, 25);
+		btnExport.addActionListener(new ColdStorageListener());
 		panel_2.add(btnExport);
 		
 		JLabel lblPublic = new JLabel("Public :");
@@ -129,6 +136,39 @@ public class WalletBuilderGUI extends JPanel {
 		panel_2.add(txtrPrivate);
 	}
 	
+	class ColdStorageListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+	              PrintWriter pw = new PrintWriter("coldStorage.txt");
+	              String pubKey = txtrPublic.getText();
+	              String prvKey = txtrPrivate.getText();
+	             
+	              pw.print("Public Key: " + pubKey);
+	              pw.println();
+	              pw.println("Private Key: " + prvKey);
+	             
+	              pw.close();
+	        }  catch (FileNotFoundException f) {
+	              System.out.println("CStorageExportFail");
+	              f.printStackTrace();
+	        }
+			
+		}
+		
+	}
+	
+	class DisplayKeyListener implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String[] keyPair = KeyFunc.toColdStorage(KeyFunc.getPrivKey());
+			txtrPrivate.setText(keyPair[0]);
+			txtrPublic.setText(keyPair[1]);
+		}
+		
+	}
 	class ComboListen implements ActionListener {
 		
 		@Override
@@ -139,18 +179,73 @@ public class WalletBuilderGUI extends JPanel {
 			
 				case "":
 					warn.setText("");
+					warn.setBounds(185, 60, 225, 33);
+					textField_1.setBounds(150, 120, 288, 44);
+					textField_1.setText("");
 					break;
 				case "Generate new Key Pair":
+					warn.setBounds(85, 60, 415, 33);
 					warn.setText("Generating new Key Pair will DESTROY PREVIOUS KEYS. Proceed?");
 					break;
 				case "View Public Key":
+					warn.setBounds(185, 60, 225, 33);
 					warn.setText("Click to view Public Key");
 					break;
 				case "View Private Key":
-					warn.setText("WARNING: Your private key is sensitive data, and mishandling it can lead to complete loss of funds. Proceed?");
+					warn.setBounds(80, 50, 420, 50);
+					warn.setText("<html>WARNING: Your private key is sensitive data; mishandling<br />it can lead to complete loss of funds. Proceed?</html>");
 					break;
 			}
 			
 		}
+	}
+	
+	class KeyMListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			String str = (String) warn.getText();
+			switch (str) {
+				
+				case "":
+					textField_1.setBounds(150, 120, 288, 44);
+					textField_1.setText("");
+					break;
+				case "Generating new Key Pair will DESTROY PREVIOUS KEYS. Proceed?":
+					warn.setText("Ensure all funds associated with old key are transferred. Proceed?");
+					warn.setBounds(80, 60, 425, 33);
+					break;
+				case "Ensure all funds associated with old key are transferred. Proceed?":
+					ECKey newkey = new ECKey();
+					KeyFunc.writePrivKey(newkey.getPrivKeyBytes());
+					KeyFunc.writePubKey(newkey.getPubKey());
+					textField_1.setBounds(150, 120, 288, 44);
+					textField_1.setText("New Key Pair generated.");
+					warn.setText("");
+					warn.setBounds(185, 60, 225, 33);
+					break;
+				case "<html>WARNING: Your private key is sensitive data; mishandling<br />it can lead to complete loss of funds. Proceed?</html>":
+					ECKey keypair = ECKey.fromPrivate(KeyFunc.getPrivKey());
+					textField_1.setBounds(25, 120, 550, 44);
+					textField_1.setText(keypair.getPrivateKeyAsHex());
+					warn.setText("");
+					warn.setBounds(185, 60, 225, 33);
+					break;
+				case "Click to view Public Key":
+					ECKey keypair2 = ECKey.fromPrivate(KeyFunc.getPrivKey());
+					textField_1.setBounds(25, 120, 550, 44);
+					textField_1.setText(keypair2.getPublicKeyAsHex());
+					warn.setText("");
+					warn.setBounds(185, 60, 225, 33);
+					break;
+				
+				
+				
+				
+			}
+			
+		}
+		
 	}
 }

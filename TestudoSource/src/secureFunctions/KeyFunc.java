@@ -1,10 +1,6 @@
 package secureFunctions;
 
-import java.math.BigInteger;
-import java.util.Arrays;
-
-import org.bitcoinj.core.Address;
-import org.bitcoinj.core.Base58;
+import java.io.IOException;
 import org.bitcoinj.core.ECKey;
 
 public class KeyFunc {
@@ -14,13 +10,14 @@ public class KeyFunc {
 		return newkey.getPrivKeyBytes(); 
 	}
 	
-	public static byte[] publicKeyGen(BigInteger privKey) {
+	public static byte[] publicKeyGen(byte[] privKey) {
 		ECKey newkey = ECKey.fromPrivate(privKey);
 		return newkey.getPubKey();
 	}
 	
-	public static String[] toColdStorage(byte[] privKey, byte[] pubKey){
-		String[] coldKeys = { Arrays.toString(privKey), Arrays.toString(pubKey) };
+	public static String[] toColdStorage(byte[] privKey){
+		ECKey newkey = ECKey.fromPrivate(privKey);
+		String[] coldKeys = { newkey.getPrivateKeyAsHex(), newkey.getPublicKeyAsHex() };
 		return coldKeys;
 	}
 	
@@ -33,5 +30,26 @@ public class KeyFunc {
 		KeyFile reader = new KeyFile();
 		return reader.getPublicKey();
 	}
+	
+	public static boolean writePubKey(byte[] key) {
+		KeyFile reader = new KeyFile();
+		try {
+			return reader.writePublicKey(key);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
+	public static boolean writePrivKey(byte[] key) {
+		KeyFile reader = new KeyFile();
+		try {
+			return reader.writePrivateKey(key);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	
 }
