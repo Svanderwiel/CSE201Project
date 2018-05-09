@@ -46,15 +46,14 @@ public class WalletBuilderGUI extends JPanel {
 		contentPane.add(tabbedPane);
 		
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("Key Generation", null, panel, null);
+		tabbedPane.addTab("Key Management", null, panel, null);
 		panel.setLayout(null);
 		
-		//CAN ONLY HAVE ONE KEYPAIR
 		comboBox = new JComboBox<String>();
 		comboBox.setBounds(150, 13, 288, 22);
-		comboBox.addItem("Generate new Private Key");
-		comboBox.addItem("Generate new Public Key");
-		comboBox.addItem("View Public Keys");
+		comboBox.addItem("");
+		comboBox.addItem("Generate new Key Pair");
+		comboBox.addItem("View Public Key");
 		comboBox.addItem("View Private Key");
 		comboBox.setEditable(false);
 	
@@ -138,12 +137,17 @@ public class WalletBuilderGUI extends JPanel {
 			String str = (String) comboBox.getSelectedItem();
 			switch (str) {
 			
-				case "Generate new Private Key":
-					warn.setText("Generating new Private Key will destroy all old keys. Proceed?");
+				case "":
+					warn.setText("");
 					break;
-				case "Generate new Public Key":
-					
-					warn.setText("Derived Public Key:");
+				case "Generate new Key Pair":
+					warn.setText("Generating new Key Pair will DESTROY PREVIOUS KEYS. Proceed?");
+					break;
+				case "View Public Key":
+					warn.setText("Click to view Public Key");
+					break;
+				case "View Private Key":
+					warn.setText("WARNING: Your private key is sensitive data, and mishandling it can lead to complete loss of funds. Proceed?");
 					break;
 			}
 			

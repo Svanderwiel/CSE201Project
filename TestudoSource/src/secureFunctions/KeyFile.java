@@ -25,7 +25,7 @@ public class KeyFile {
 		
 	}
 	
-	public byte[] getPrivateKey() {
+	protected byte[] getPrivateKey() {
 		try {
 			read = new Scanner(privFile);
 		} catch (FileNotFoundException e) {
@@ -37,7 +37,7 @@ public class KeyFile {
 		return Base64.getDecoder().decode(privEnc);
 	}
 	
-	public boolean writePrivateKey(byte[] privKey) throws IOException {
+	protected boolean writePrivateKey(byte[] privKey) throws IOException{
 		try {
 			write = new FileWriter(privFile);
 		} catch (IOException e) {
@@ -49,7 +49,7 @@ public class KeyFile {
 		return true;
 	}
 	
-	public byte[] getPublicKey() {
+	protected byte[] getPublicKey() {
 		try {
 			read = new Scanner(pubFile);
 		} catch (FileNotFoundException e) {
@@ -61,6 +61,17 @@ public class KeyFile {
 		return Base64.getDecoder().decode(pubEnc);
 	}
 	
+	protected boolean writePublicKey(byte[] pubKey) throws IOException{
+		try {
+			write = new FileWriter(pubFile);
+		} catch (IOException e) {
+			System.out.println("KeyFileWriteFail");
+			return false;
+		}
+		write.write(Base64.getEncoder().encodeToString(pubKey) + "\n");
+		write.close();
+		return true;
+	}
 }
 
 

@@ -1,6 +1,7 @@
 package secureFunctions;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 import org.bitcoinj.core.Address;
 import org.bitcoinj.core.Base58;
@@ -18,8 +19,8 @@ public class KeyFunc {
 		return newkey.getPubKey();
 	}
 	
-	public static String[] toColdStorage(ECKey keyPair){
-		String[] coldKeys = {keyPair.getPrivateKeyAsHex(), keyPair.getPublicKeyAsHex()};
+	public static String[] toColdStorage(byte[] privKey, byte[] pubKey){
+		String[] coldKeys = { Arrays.toString(privKey), Arrays.toString(pubKey) };
 		return coldKeys;
 	}
 	
@@ -27,4 +28,10 @@ public class KeyFunc {
 		KeyFile reader = new KeyFile();
 		return reader.getPrivateKey();
 	}
+	
+	public static byte[] getPubKey() {
+		KeyFile reader = new KeyFile();
+		return reader.getPublicKey();
+	}
+
 }
