@@ -24,6 +24,7 @@ public class WalletBuilderGUI extends JPanel {
 	protected JButton btnExport;
 	protected JTextArea txtrPublic;
 	protected JTextArea txtrPrivate;
+	protected JButton warn;
 	
 	private JPanel contentPane;
 	public JPanel getContentPane() {
@@ -48,16 +49,25 @@ public class WalletBuilderGUI extends JPanel {
 		tabbedPane.addTab("Key Generation", null, panel, null);
 		panel.setLayout(null);
 		
+		//CAN ONLY HAVE ONE KEYPAIR
 		comboBox = new JComboBox<String>();
 		comboBox.setBounds(150, 13, 288, 22);
-		comboBox.addItem("Generate new private key");
-		comboBox.addItem("Generate new public key");
-		comboBox.addItem("View public keys");
-		comboBox.addItem("View private keys");
+		comboBox.addItem("Generate new Private Key");
+		comboBox.addItem("Generate new Public Key");
+		comboBox.addItem("View Public Keys");
+		comboBox.addItem("View Private Key");
+		comboBox.setEditable(false);
+	
+		comboBox.addActionListener(new ComboListen());
+		
 		panel.add(comboBox);
 		
+		warn = new JButton(" ");
+		warn.setBounds(185, 60, 225, 22);
+		panel.add(warn);
+		
 		textField_1 = new JTextField();
-		textField_1.setBounds(150, 92, 288, 22);
+		textField_1.setBounds(150, 120, 288, 44);
 		textField_1.setEditable(false);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
@@ -86,13 +96,6 @@ public class WalletBuilderGUI extends JPanel {
 		textArea.setBounds(56, 47, 471, 130);
 		textArea.setEditable(false);
 		panel_1.add(textArea);
-		
-		//Attempting to implement scroll bar
-		//JScrollPane scroll = new JScrollPane(textArea);
-		//scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		//scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		//panel_1.add(scroll);
-		
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Cold Storage", null, panel_2, null);
@@ -125,5 +128,25 @@ public class WalletBuilderGUI extends JPanel {
 		txtrPrivate.setBounds(173, 150, 289, 22);
 		txtrPrivate.setEditable(false);
 		panel_2.add(txtrPrivate);
+	}
+	
+	class ComboListen implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			String str = (String) comboBox.getSelectedItem();
+			switch (str) {
+			
+				case "Generate new Private Key":
+					warn.setText("Generating new Private Key will destroy all old keys. Proceed?");
+					break;
+				case "Generate new Public Key":
+					
+					warn.setText("Derived Public Key:");
+					break;
+			}
+			
+		}
 	}
 }

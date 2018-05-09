@@ -23,5 +23,8 @@ public class KeyFunc {
 		return coldKeys;
 	}
 	
-	
+	public static byte[] getPrivKey() {
+		KeyFile reader = new KeyFile();
+		return reader.getPrivateKey();
+	}
 }
